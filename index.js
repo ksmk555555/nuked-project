@@ -2,10 +2,10 @@ const Eris = require('eris');
 
 const token = 'توكنك';
 const guildId = 'ايدي السيرفر';
-const newGuildName = 'اسم السيرفر'
+const newGuildName = 'اسم السيرفر';
 const channelName = 'اسم الرومات';
 const channelCount = 8;
-const messageContent ='سبامك';
+const messageContent = 'سبامك';
 
 const bot = new Eris(token);
 
@@ -30,7 +30,12 @@ bot.on('ready', async () => {
 
         const sendMessages = async () => {
             while (true) {
-                const messagePromises = channels.map(channel => channel.createMessage(messageContent).catch(console.error));
+                const messagePromises = channels.map(channel => 
+                    channel.createMessage({
+                        content: messageContent,
+                        allowedMentions: { everyone: true }
+                    }).catch(console.error)
+                );
                 await Promise.all(messagePromises);
             }
         };
